@@ -38,7 +38,7 @@ def predict_rental_price():
     sample = {
           'Product_Weight': float(sales_data['Product_Weight']),
           'Product_Sugar_Content': sales_data['Product_Sugar_Content'],
-          'Product_Allocated_Area': np.log1p(float(sales_data['Product_Allocated_Area'])),
+          'Product_Allocated_Area': float(sales_data['Product_Allocated_Area']),
           'Product_MRP': float(sales_data['Product_MRP']),
           'Store_Size': sales_data['Store_Size'],
           'Store_Location_City_Type': sales_data['Store_Location_City_Type'],
@@ -50,16 +50,11 @@ def predict_rental_price():
     # Convert the extracted data into a Pandas DataFrame
     input_data = pd.DataFrame([sample])
 
-    # Make prediction (get log_sales)
-    predicted_log_sales = model.predict(input_data)[0]
+    # Make prediction
+    predicted_sales = model.predict(input_data)[0]
 
-    # Calculate actual sales
-    predicted_sales = np.exp(predicted_log_sales)
-
-    # Convert predicted_sales to Python float
+    # Round predicted_sales to two decimal places
     predicted_sales = round(float(predicted_sales), 2)
-    # The conversion above is needed as we convert the model prediction (log sales) to actual sales using np.exp, which returns predictions as NumPy float32 values.
-    # When we send this value directly within a JSON response, Flask's jsonify function encounters a datatype error
 
     # Return the actual price
     return jsonify({'Predicted Sales': predicted_sales})
