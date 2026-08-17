@@ -1,6 +1,7 @@
 
 import streamlit as st
 import pandas as pd
+import requests
 
 # Base URL of the Flask backend
 BACKEND_URL = "https://backend:7860"
