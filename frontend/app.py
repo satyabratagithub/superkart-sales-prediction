@@ -2,7 +2,14 @@
 import streamlit as st
 import pandas as pd
 
+# Base URL of the Flask backend
+BACKEND_URL = "http://backend:7860"
+
+# Set the title of the Streamlit app
 st.title("SuperKart Sales Prediction App")
+
+# Section for online prediction
+st.subheader("Online Prediction")
 
 # Input fields for product and store data
 Product_Weight = st.number_input("Product Weight", min_value=0.0, value=12.66)
@@ -29,7 +36,7 @@ product_data = {
 
 if st.button("Predict", type='primary'):
   try:
-    response = requests.post("https://SatyabrataChoudhury-SuperKartSalesPredictionBackend.hf.space/v1/predict", json=product_data)    # Complete the code to enter user name and space name to correctly define the endpoint
+    response = requests.post(f"{BACKEND_URL}/v1/sales", json=product_data)    # Complete the code to enter user name and space name to correctly define the endpoint
     if response.status_code == 200:
         result = response.json()
         predicted_sales = result["Predicted Sales"]
