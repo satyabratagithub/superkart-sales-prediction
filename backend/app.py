@@ -9,7 +9,7 @@ superkart_app = Flask("SuperKart Sales Predictor")
 
 
 # Load the trained machine learning model
-model = joblib.load("superkart_forecast_model_v1.joblib")
+model = joblib.load("superkart_forecast_model_v1_0.joblib")
 
 # Define a route for the home page (GET request)
 @superkart_app.get('/')
