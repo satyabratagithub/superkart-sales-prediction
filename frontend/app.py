@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 
 # Base URL of the Flask backend
-BACKEND_URL = "http://backend:7860"
+BACKEND_URL = "https://backend:7860"
 
 # Set the title of the Streamlit app
 st.title("SuperKart Sales Prediction App")
